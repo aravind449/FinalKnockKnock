@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState,useContext ,useEffect} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 const Login = (props) => {
     //change made varlock
     let history = useHistory();
-    const { user, setUser } = useContext(UserContext);
+    const { user , setUser } = useContext(UserContext);
     const classes = useStyles();
     const [fields, setFields] = useState({
         userId: "",
@@ -71,16 +71,17 @@ const Login = (props) => {
         try {
             const loginInfo = await customerLogin(fields);
             if (loginInfo.status === 200) {
-              // window.location = "/otp";
+              
+               setTemp(loginInfo.data[0].CustomerId);
+               setUser(temp);
+              
+               history.push("/otp");
                  
-               //// setTemp(fields['userId'])
-              //   searchCustId(temp)
+                
                 //change this to route to customer home page
 
 
-                setUser(loginInfo.data[0].CustomerId)
-               
-                history.push("/home");
+            
 
             } else {
                 console.log(loginInfo);

@@ -65,6 +65,7 @@ const SearchCategory = ({ match },props) => {
                            Click Here
            </Link>
         </td>
+        <td><a class="btn btn-info" href={'http://localhost:3002/chat?name=Customer&room='+technician.TechnicianId}target="_blank">Chat</a></td>
         </tr>
         )
     }
@@ -86,6 +87,7 @@ const SearchCategory = ({ match },props) => {
       <th>Technician</th>
       <th>Reviews</th>
       <th>Book</th>
+      <th>Chat</th>
     </tr>
   </thead>
             <tbody>

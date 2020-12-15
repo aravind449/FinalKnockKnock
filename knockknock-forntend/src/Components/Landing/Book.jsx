@@ -82,7 +82,7 @@ const CustomerRegistration = ({ match },props) => {
            
             const status = await book(fields);
             if (status === 200) {
-                window.location = "/";
+                window.location = "/home";
             } else {
                 alert("Some problem occurred in booking. Refresh the page and try again.")
             }

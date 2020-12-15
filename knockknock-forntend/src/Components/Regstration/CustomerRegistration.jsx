@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         width: "100%",
     },
+    tablo:{
+        color:"red"
+    },
     button: {
         width: "45%",
         backgroundColor: "#2B4257",
@@ -55,6 +58,13 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomerRegistration = (props) => {
     const classes = useStyles();
+    const [userIdError,setUserIdError]=useState("")
+    const [emailIdError, setEmailIdError] = useState("")
+    const [phoneError, setPhoneError] = useState("")
+    const [postalError, setPostalError] = useState("")
+
+
+
     const [fields, setFields] = useState({
         userId: "",
         email: "",
@@ -65,12 +75,47 @@ const CustomerRegistration = (props) => {
         city: "",
         country: "",
         postalCode: "",
+        //userIdError:"",
     });
 
     const onChange = (e) => {
         e.preventDefault();
         setFields({...fields, [e.target.name]: e.target.value});
+        //user id validation
+        if ([e.target.name] =='userId')
+        {
+            if (e.target.value.length<5)
+                setUserIdError("*User Id Length Should Be Atleast Four")
+            else
+                setUserIdError("")
+        }
+
+        //email id validation
+        if ([e.target.name] == 'email') {
+            if (!e.target.value.includes('@'))
+                setEmailIdError("*Invalid Email Id")
+            else
+                setEmailIdError("")
+        }
+
+        //phone number validation
+        if ([e.target.name] == 'mobile') {
+            if (e.target.value.length < 10 || !e.target.value.match(/^[0-9]+$/)) 
+                setPhoneError("*Invalid Phone Number")
+            else
+                setPhoneError("")
+        }
+
+        //postal code validation
+        if ([e.target.name] == 'postalCode') {
+            if (e.target.value.length < 6 || e.target.value.length > 6)
+                setPostalError("*Invalid Postal Code")
+            else
+                setPostalError("")
+        }
+
     };
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -100,7 +145,7 @@ const CustomerRegistration = (props) => {
                 <Grid item xs={12} className={classes.gridItemText}>
                     <div className={classes.containerDiv}>
                         <Typography className={classes.formTextField}>
-                            User Id
+                                User Id 
                         </Typography>
                         <TextField
                             id="userId"
@@ -109,8 +154,11 @@ const CustomerRegistration = (props) => {
                             variant="outlined"
                             size="small"
                             className={classes.textField}
+                                //errorText={userIdError}
                             onChange={onChange}
+                               // helperText={userIdError}
                         />
+                          
                     </div>
                     <div className={classes.containerDiv}>
                         <Typography className={classes.formTextField}>
@@ -245,6 +293,14 @@ const CustomerRegistration = (props) => {
                     </Button>
                 </Grid>
                 </form>
+            </Grid>
+            <Grid item xs={3} className={classes.gridItemButton}>
+                <table className={classes.tablo}>
+                <tr>{userIdError}</tr>
+                <tr> {emailIdError}</tr>
+                <tr> {phoneError}</tr>
+                <tr> {postalError}</tr>
+                </table>
             </Grid>
         </div>
     );

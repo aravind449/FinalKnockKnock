@@ -16,6 +16,8 @@ import FOtp from './Components/Login/FOtp';
 import ChangePassword from './Components/Login/ChangePassword';
 import TechPage from "./Components/Landing/TechPage";
 import Book from "./Components/Landing/Book";
+import Profile from "./Components/Landing/Profile";
+
 import Comments from "./Components/Landing/Comments";
 import Techwall from './Components/TechnicianProfile/Techwall'
 
@@ -23,6 +25,9 @@ import { UserContext } from './UserContext';
 import Admin from './Components/Admin/admin'
 import Allusers from './Components/Admin/Allusers.jsx';
 import Alltech from './Components/Admin/Alltech';
+import Booked from './Components/Admin/Booked';
+
+
 
 const useStyles = makeStyles((theme) => ({
     root : {
@@ -33,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
 
-    const [user, setUser] = useState(1);
+    const [user, setUser] = useState(39);
     const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
     const classes = useStyles();
     return (
@@ -52,8 +57,8 @@ function App() {
                         <Route path={"/customer-registration"}>
                             <CustomerRegistration />
                         </Route>
-                        <Route path={"/change-password"}>
-                            <ChangePassword />
+                        <Route path={"/change-password/:id"} component={ChangePassword}>
+                            
                         </Route>
                         <Route path={"/tech-page/:id"} component={TechPage}>
                            
@@ -76,8 +81,10 @@ function App() {
                         <Route path={"/otp"}>
                             <Otp />
                         </Route>
-                        <Route path={"/fotp/:id"}>
-                            <FOtp/>
+
+                       
+                        <Route path={"/fotp/:id"} component={FOtp}>
+                          
                         </Route>
                             {/* Edited part */}
                             <Route path={"/techwall"}>
@@ -86,11 +93,18 @@ function App() {
                             <Route path={"/admin"}>
                                 <Admin />
                             </Route>
+                            <Route path={"/profile"}>
+                                <Profile />
+                            </Route>
                             <Route path={"/allusers"}>
                                 <Allusers />
                             </Route>
                             <Route path={"/alltech"}>
                                 <Alltech />
+                            </Route>
+                           
+                            <Route path={"/book"}>
+                                <Booked />
                             </Route>
                         </UserContext.Provider>
                     </Switch>

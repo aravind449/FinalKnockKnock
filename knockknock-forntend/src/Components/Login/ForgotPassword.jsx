@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { fpassword } from "../../Utils/Api";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     gridItem: {
@@ -69,8 +70,9 @@ const Fpassword = (props) => {
             
             if (loginInfo.status === 200) {
                
-               //window.location =  "/fotp";
-               window.location =  {'/fotp/':fields.email}
+              //  <Redirect path="/fotp"/>
+              // window.location =  "/fotp";
+              window.location.href ='/fotp/'+fields.email; 
             } else {
               
                 alert(loginInfo);

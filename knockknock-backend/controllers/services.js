@@ -104,7 +104,7 @@ exports.getCommentsByTechId = (req, res) => {
 };
 
 exports.getBookingDetails = (req, res) => {
-
+    
     console.log("inside router booking" + req.body.searchValue);
     if (req.body) {
         let SQLQuery = `SELECT * FROM knockknock.Booking WHERE TechnicianID LIKE '%${req.body.searchValue}%';`;
@@ -118,6 +118,26 @@ exports.getBookingDetails = (req, res) => {
 
 
     } else {
+        console("99999");
+        res.status(400).json({ msg: "search not found" });
+    }
+};
+exports.getBookingCDetails = (req, res) => {
+    
+    console.log("inside router booking" + req.body.searchValue);
+    if (req.body) {
+        let SQLQuery = `SELECT * FROM knockknock.Booking WHERE CustomerID LIKE '%${req.body.searchValue}%';`;
+        // 
+        mysqlConnectionObject.query(SQLQuery, (err, result) => {
+            if (err) { console.log(err); }
+            else {
+                res.status(200).json(result);
+            }
+        });
+
+
+    } else {
+        console("99999");
         res.status(400).json({ msg: "search not found" });
     }
 };
