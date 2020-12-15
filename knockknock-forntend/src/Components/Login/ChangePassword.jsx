@@ -53,10 +53,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChangePassword = (props) => {
+const ChangePassword = ({ match },props) => {
     const classes = useStyles();
     const [fields, setFields] = useState({
-        
+        email: match.params.id,
         password: "",
         confirmPassword: "",
         
@@ -71,6 +71,7 @@ const ChangePassword = (props) => {
         e.preventDefault();
         console.log(fields);
         if (fields.password===fields.confirmPassword) {
+          //  alert(match.params.id);
             const status = await changepassword(fields);
             if (status === 200) {
                 window.location = "/";

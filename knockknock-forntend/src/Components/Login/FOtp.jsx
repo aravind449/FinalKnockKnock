@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const FOtp = (props) => {
+const FOtp = ({ match },props) => {
     const classes = useStyles();
     const [fields, setFields] = useState({
         otp: "",
@@ -67,18 +67,18 @@ const FOtp = (props) => {
         
         try {
             
-            alert('fotp fotp 1');
+          
             const status = await fotp(fields);
             console.log('status check');
-            alert('fotp fotp 2');
+         
 
             console.log(status);
             if (status === 200) {
-                alert('fotp fotp 3');
+              
 
                
                
-                window.location = "/change-password";
+                window.location = "/change-password/"+ match.params.id;
             } else {
                 console.log(status);
                 alert(status);

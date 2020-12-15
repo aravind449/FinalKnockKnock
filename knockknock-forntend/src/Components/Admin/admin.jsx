@@ -82,16 +82,16 @@ function admin() {
                     <div >
                     <br/>
                     <br/>
-                        <table align="center">
+                        <table class="table" align="center">
                             <tr height="100%">
                                 <td height="100%" width="100%" valign="middle" align="center">
-                                    <Typography variant={"h5"}>
-                                        <tr><a href="/allusers">Fetch All Users</a></tr>
-                                        <tr><a href="/alltech">Fetch All Technitions</a></tr>
-                                    <tr>Fetch Type Of Services</tr>
-                                    <tr>Fetch ll Completed esrvice</tr>
-                                    <tr>Fetch unbook services</tr>
-                                    <tr>Fetch booked services</tr>
+                                <Typography variant={"h5"}>
+                                        <tr ><a class="btn-lg btn-primary btn-block" href="/allusers">Fetch All Users</a></tr>
+<br></br>
+                                        <tr><a class="btn-lg btn-success btn-block" href="/alltech">Fetch All Technitions</a></tr>
+                               <br></br> 
+                                      
+                                       <tr> <a class="btn-lg btn-danger btn-block" href="/book">Fetch booked services</a></tr>
                                     </Typography>
                                 </td>
                             </tr>

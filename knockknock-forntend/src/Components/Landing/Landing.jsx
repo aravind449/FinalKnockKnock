@@ -18,7 +18,7 @@ const Landing = (props) => {
         <>
             <Grid container className={classes.landingContainer}>
             <Grid item xs={3}>
-                   
+                  
                    </Grid>
                    <Grid item xs={6}>
                        <Login/>

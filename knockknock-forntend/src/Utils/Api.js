@@ -24,6 +24,16 @@ const changepassword = async (fields) => {
     const response = await axios.post("/users/change-password", fields);
     return response.status;
 };
+const accept = async (fields) => {
+    
+    const response = await axios.post("/users/acceptBooking", fields);
+    
+    return response.status;
+};
+const decline = async (fields) => {
+    const response = await axios.post("/users/decline", fields);
+    return response.status;
+};
 
 const technicianRegistration = async (fields) => {
     const response = await axios.post("/users/technician-registration", fields);
@@ -36,10 +46,10 @@ const otp2 = async (fields) => {
 };
 
 const fotp = async (fields) => {
-    alert('fotp fotp 21')
+   
 
     const response = await axios.post("/users/fotp", fields);
-    alert('fotp fotp 22')
+  
 
     return response.status;
 };
@@ -74,6 +84,10 @@ const getTechnicianCategoriesRegex = async (search) => {
     return response.data;
 };
 
+const getBookingDetailsForCustomer = async (search) => {
+    const response = await axios.post("/services/list-bookingc-details", search);
+    return response.data;
+};
 // changes made for technitian profile varlock
 const getBookingDetailsForTechnition = async (search) => {
     const response = await axios.post("/services/list-booking-details", search);
@@ -87,7 +101,17 @@ const getAllTechListApi = async () => {
     const response = await axios.get("/services/list-tech");
     return response.data;
 };
+const customerProfile = async(fields) => {
+    console.log("inside customer profile")
+    const response = await axios.post("/user/customer-profile", fields);
+    return response.status;
+};
 
+const editCustomerProfile = async(fields) => {
+    console.log("Edit customer profile")
+    const response = await axios.post("/user/editcustomer-profile", fields);
+    return response.status;
+};
 const getTechIdApi = async (search) => {
     const response = await axios.post("/services/techidbyname", search);
     return response.data;
@@ -98,6 +122,10 @@ const getCustIdApi = async (search) => {
     return response.data;
 };
 
+const getBookListApi = async () => {
+    const response = await axios.get("/users/list-book");
+    return response.data;
+};
 
 export {
     customerLogin,
@@ -117,6 +145,12 @@ getAllUserListApi,
 getAllTechListApi,
     getTechIdApi,
     getCustIdApi,
-
+     customerProfile,
+     editCustomerProfile,
     book,
+    accept,
+    decline,
+    getBookListApi,
+    getBookingDetailsForCustomer,
+  
 };

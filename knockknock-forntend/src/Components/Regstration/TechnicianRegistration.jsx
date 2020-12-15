@@ -12,13 +12,23 @@ const useStyles = makeStyles((theme) => ({
     landingContainer: {
         flexGrow: 1,
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        // justifyContent: "center",
+        // alignItems: "stretch",
+    //     flexDirection:"column",
+    // alignItems: "flex-start",
+    marginTop:"10px",
+
+        flexWrap: "wrap",
+    height: "400px",
+    alignContent: "space-between",
     },
     loginContainer: {
-        width: "40%",
+        marginLeft:"220px",
+        width: "50%",
         border: "2px solid #A8A8A8",
-        padding: "1em"
+        padding: "1em",
+        //marginTop: "3 em",
+        //marginLeft:"2 em"
     },
     gridItemText: {
         marginBottom: "0.8em",
@@ -44,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         width: "100%",
     },
+    tablo: {
+        color: "red",marginLeft:"20px"
+       
+    },
     button: {
         width: "45%",
         backgroundColor: "#2B4257",
@@ -57,6 +71,11 @@ const useStyles = makeStyles((theme) => ({
 
 const TechnicianRegistration = (props) => {
     const classes = useStyles();
+    const [userIdError, setUserIdError] = useState("")
+    const [emailIdError, setEmailIdError] = useState("")
+    const [phoneError, setPhoneError] = useState("")
+    const [postalError, setPostalError] = useState("")
+
 
     const [technicianCategories, setTechnicianCategories] = useState();
     const [fields, setFields] = useState({
@@ -86,6 +105,39 @@ const TechnicianRegistration = (props) => {
     const onChange = (e) => {
         e.preventDefault();
         setFields({...fields, [e.target.name]: e.target.value});
+
+        //user id validation
+        if ([e.target.name] == 'userId') {
+            if (e.target.value.length < 5)
+                setUserIdError("*User Id Length Should Be Atleast Four")
+            else
+                setUserIdError("")
+        }
+
+        //email id validation
+        if ([e.target.name] == 'email') {
+            if (!e.target.value.includes('@'))
+                setEmailIdError("*Invalid Email Id")
+            else
+                setEmailIdError("")
+        }
+
+        //phone number validation
+        if ([e.target.name] == 'mobile') {
+            if (e.target.value.length < 10 || !e.target.value.match(/^[0-9]+$/))
+                setPhoneError("*Invalid Phone Number")
+            else
+                setPhoneError("")
+        }
+
+        //postal code validation
+        if ([e.target.name] == 'postalCode') {
+            if (e.target.value.length < 6 || e.target.value.length > 6)
+                setPostalError("*Invalid Postal Code")
+            else
+                setPostalError("")
+        }
+
     };
 
     const onSubmit = async (e) => {
@@ -104,7 +156,9 @@ const TechnicianRegistration = (props) => {
     };
 
     return (
+        
         <div className={classes.landingContainer}>
+            
             <Grid container className={classes.loginContainer}>
                 <Grid item xs={12} className={classes.formTitle}>
                     <Typography variant={"h5"}>
@@ -298,6 +352,14 @@ const TechnicianRegistration = (props) => {
                         </Button>
                     </Grid>
                 </form>
+            </Grid>
+            <Grid item xs={3} className={classes.gridItemButton}>
+                <table className={classes.tablo}>
+                    <tr>{userIdError}</tr>
+                    <tr> {emailIdError}</tr>
+                    <tr> {phoneError}</tr>
+                    <tr> {postalError}</tr>
+                </table>
             </Grid>
         </div>
     );

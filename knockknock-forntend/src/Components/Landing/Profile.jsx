@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from '@material-ui/core/TextField';
-import { getTechnicianCategories, getBookingDetailsForTechnition ,accept,decline} from "../../Utils/Api";
+import { getTechnicianCategories, getBookingDetailsForCustomer} from "../../Utils/Api";
 import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import zIndex from "@material-ui/core/styles/zIndex";
@@ -62,10 +62,7 @@ function Techwall() {
     const [technicianCategories, setTechnicianCategories] = useState();
     const [bookings, setBookings] = useState();
     const { user, setUser } = useContext(UserContext);
-    const [fields, setFields] = useState({
-        customerId:1
-        
-    });
+  
 //changes here===================================================================================
     //const { user, setUser } = useContext(UserContext);
    // const [user, setUser] = useState(UserContext)
@@ -86,41 +83,11 @@ function Techwall() {
 
     const searchBooking = async (search) => {
         const searchValue = { searchValue: search };
-        const bookings = await getBookingDetailsForTechnition(searchValue);
+        const bookings = await getBookingDetailsForCustomer(searchValue);
         setBookings(bookings);
     };
 
-    const onAccept = id2=> async (e) => {
-       
-        e.preventDefault();
-       
-       
-        setFields(
-            {
-                
-                customerId:id2
-            }
-        );
-        
-       
-        const status = await accept(fields);
-        searchBooking(user);
-      
-    };
-
-    const onDecline= id => async (e) => {
-       e.preventDefault();
-     
-       setFields(
-        {
-            
-            customerId:id
-        }
-    );
-        const status = await decline(fields);
-        searchBooking(user);
-
-    };
+   
 
     return (
         <div>
@@ -141,8 +108,7 @@ function Techwall() {
                         <th>Customer Id</th>
                         <th>Date Of Booking</th>
                         <th>Status</th>
-                        <th>Response</th>
-                        <th>Response</th>
+                       
                         <th>Chat</th>
                     </thead>
 
@@ -153,30 +119,10 @@ function Techwall() {
                             <td>{book.CustomerID}</td>
                             <td>{book.Dateofbook}</td>
                             <td>{book.Stat}</td>
-                            <td> 
-                            <form onSubmit={onAccept(book.BookingID)}><Button
-                        variant="contained"
-                        type="submit"
-                       class="btn btn-success"
-                    >
-                        Accept
-                    </Button>
-                    </form>
-                    </td>  
-                    <td> 
-                    <form onSubmit={onDecline(book.BookingID)}>
-                        <Button
-                        variant="contained"
-                        type="submit"
-                       class="btn btn-danger"
-                    >
-                        Decline
-                    </Button>
-                    </form>
-                    </td>  
+                           
                     
                 
-                    <td><a class="btn btn-info" href={'http://localhost:3002/chat?name=Technician&room='+book.BookingID}target="_blank">Chat</a></td>
+                          <td><a class="btn btn-info" href={'http://localhost:3002/chat?name=Customer&room='+book.BookingID}target="_blank">Chat</a></td>
                     
                    
                         </tr>

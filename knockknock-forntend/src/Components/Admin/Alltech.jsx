@@ -33,7 +33,7 @@ function Allusers(props) {
                             <tr height="100%">
                                 <td height="100%" width="100%" valign="middle" align="center">
                                     <Typography variant={"h5"}>
-                                        <table border="1">
+                                        <table class="table table-bordered">
                                             <tr>
                                                 {/* <th>{user}</th> */}
                                                 <th>Customer Id</th>
